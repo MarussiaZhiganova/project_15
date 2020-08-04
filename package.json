@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest",
     "start": "node app.js",
-    "dev": "nodemon app.js"
+    "dev": "nodemon app.js",
+    "deploy": "npm run build && scp -r ./dist/* marussia@84.201.129.215:/home/marussia/projects/frontend"
   },
   "author": "Marussia Zhiganova",
   "license": "ISC",
