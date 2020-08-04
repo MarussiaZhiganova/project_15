@@ -8,6 +8,17 @@ https://github.com/MarussiaZhiganova/project_15
 
 ПО для выполнения работы: Git, Express, NPM-пакеты, MongoDB, Postman.
 
+### Ссылки
+
+-   Фронтенд проекта доступен по адресам:
+    -   [mestomaru.xyz](https://mestomaru.xyz/)
+    -   [www.mestomaru.xyz](https://www.mestomaru.xyz/)
+-   Бэкенд проекта доступен по адресам:
+    -   [api.mestomaru.xyz](https://api.mestomaru.xyz/)
+    -   [www.api.mestomaru.xyz](https://www.api.mestomaru.xyz/)
+    -   [84.201.129.215](http://84.201.129.215/)
+-   [Актуальная версия проекта на Github - v0.0.1](https://github.com/MarussiaZhiganova/project_15)
+
 Public IP: 84.201.129.215
 -   все ошибки обрабатываются централизованно;
 -   тела запросов и, где необходимо, заголовки и параметры, валидируются по определённым схемам. Если запрос не соответствует схеме, обработка не передаётся контроллеру и клиент получает ошибку валидации;
