@@ -4,7 +4,10 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const helmet = require('helmet');
 
+
 const { celebrate, Joi, errors } = require('celebrate');
+
+const NotFoundError = require('./errors/not-found-err');
 
 const app = express();
 
@@ -36,9 +39,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.post('/signup', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
-    password: Joi.string().required().min(8),
+    password: Joi.string().required().min(11),
     name: Joi.string().required().min(2).max(30),
-    about: Joi.string().required().min(2),
+    about: Joi.string().required().min(2).max(30),
     avatar: Joi.string().uri().required(),
   }),
 }), createUser);
@@ -46,7 +49,7 @@ app.post('/signup', celebrate({
 app.post('/signin', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
-    password: Joi.string().required().min(8),
+    password: Joi.string().required().min(11),
   }),
 }), login);
 
@@ -61,8 +64,8 @@ app.use('/', users);
 app.use('/', cards);
 
 
-app.all('/*', (req, res) => {
-  res.status(404).send({ message: 'Запрашиваемый ресурс не найден' });
+app.use('*', (req, res, next) => {
+  next(new NotFoundError('Ресурс не найден'));
 });
 
 app.use(errorLogger);

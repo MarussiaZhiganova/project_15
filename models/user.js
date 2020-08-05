@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const isEmail = require('validator/lib/isEmail');
+const validator = require('validator');
 const bcrypt = require('bcryptjs');
 const UnauthorizedError = require('../errors/unauthorized-err');
 const ConflictingRequestError = require('../errors/conflicting-request-err');
@@ -22,22 +22,29 @@ const userSchema = new Schema({
   avatar: {
     type: String,
     required: true,
-    match: /https?:\/\/(?:[-\w]+\.)?([-\w]+)\.\w+(?:\.\w+)?\/?.*/,
+    validate: {
+      validator(link) {
+        return validator.isURL(link);
+      },
+      message: (url) => `${url.value} некорректный адрес!`,
+    },
   },
   email: {
     type: String,
     unique: true,
     required: true,
     validate: {
-      validator: (v) => isEmail(v),
-      message: 'Неправильный формат почты',
+      validator(email) {
+        return validator.isEmail(email);
+      },
+      message: (email) => `${email.value} некорректный адрес почты!`,
     },
   },
   password: {
     type: String,
     required: true,
     select: false,
-    minlength: 8,
+    minlength: 11,
   },
 });
 
