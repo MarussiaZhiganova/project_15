@@ -59,7 +59,7 @@ app.get('/crash-test', () => {
   }, 0);
 });
 
-//app.use(auth);
+app.use(auth);
 app.use('/', users);
 app.use('/', cards);
 
