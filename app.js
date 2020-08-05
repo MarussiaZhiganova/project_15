@@ -42,7 +42,7 @@ app.post('/signup', celebrate({
     password: Joi.string().required().min(11),
     name: Joi.string().required().min(2).max(30),
     about: Joi.string().required().min(2).max(30),
-    avatar: Joi.string().uri().required(),
+    avatar: Joi.string().required().pattern(/https?:\/\/(?:[-\w]+\.)?([-\w]+)\.\w+(?:\.\w+)?\/?.*/),
   }),
 }), createUser);
 
@@ -59,7 +59,7 @@ app.get('/crash-test', () => {
   }, 0);
 });
 
-app.use(auth);
+//app.use(auth);
 app.use('/', users);
 app.use('/', cards);
 
